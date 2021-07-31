@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load todo_template_tag %}
+
+{% block title %}Tasks{% endblock title %}
+
+{% block content %}
+    <h2>Tasks</h2>
+    <div class="card m-2">
+        {% for task in continuous_task %}
+            <div class="card-header m-2">
+                    <a class="font-weight-bold text-decoration-none" href="{{task.get_absolute_url}}">{{  task.title | up_first_letter }}</a> &middot;
+                    <span class="text-muted"> in {{ task.category }} group | created at: {{ task.created_at }} |
+                    will be expired at: {{ task.deadline }}</span>
+            </div>
+            <div class="px-3 m-1">
+                <a class="text-decoration-none" href="{% url 'task_detail' task.pk %}">Detail</a> |
+                <a class="text-decoration-none" href="{% url 'task_done' task.pk %}">Done</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Expired tasks</h2>
+    <div class="card m-2">
+        {% for task in expired_task %}
+            <div class="card-header m-2">
+                    <a class="font-weight-bold text-decoration-none" href="{{task.get_absolute_url}}">{{  task.title | up_first_letter }}</a> &middot;
+                    <span class="text-muted"> in {{ task.category }} group | created at: {{ task.created_at }} |
+                    will be expired at: {{ task.deadline }}</span>
+            </div>
+            <div class="px-3 m-1">
+                <a class="text-decoration-none" href="{% url 'task_detail' task.pk %}">Detail</a> |
+                <a class="text-decoration-none" href="{% url 'task_delete' task.pk %}">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

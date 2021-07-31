@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block content %}
+    <h2>Categories</h2>
+    <div class="card m-2">
+        {% for category in full_category %}
+                <div class="card-header m-2">
+                    <div >
+                        <a href="{% url 'related_task' category.id %}">{{ category.name }}</a>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <h2>Categories with no task</h2>
+    <div class="card m-2">
+        {% for category in empty_category %}
+                <div class="card-header m-2">
+                    <div>
+                        <a href="{% url 'related_task' category.id %}">{{ category.name }}</a>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+

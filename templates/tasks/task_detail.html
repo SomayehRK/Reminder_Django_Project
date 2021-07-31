@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load todo_template_tag %}
+
+{% block content %}
+    <div class="card m-2">
+        <div class="card-header m-2">
+            <h2>{{ object.title | up_first_letter }}</h2>
+            <p>categorized in  {{ object.category }}
+                | created at: {{ object.created_at }}
+                | will be expired at: {{ object.deadline }}
+                | remaining time to expiration: {% remaining_time object.deadline %}
+            </p>
+            <p>{{ object.description }}</p>
+        </div>
+    </div>
+    <hr>
+    <p>Back to <a href="{% url 'task_list' %}">All Tasks</a></p>
+{% endblock content %}

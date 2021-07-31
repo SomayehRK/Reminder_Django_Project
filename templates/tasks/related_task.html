@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load todo_template_tag %}
+
+{% block title %}Tasks{% endblock title %}
+
+{% block content %}
+    <div class="card m-2">
+        {% for task in task_in_ctg %}
+            <div class="card-header m-2">
+                    <a class="font-weight-bold" href="{% url 'task_detail' task.pk %}">{{  task.title | up_first_letter }}</a> &middot;
+                    <span class="text-muted"> in {{ task.category }} group | created at: {{ task.created_at }} |
+                    will be expired at: {{ task.deadline }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
